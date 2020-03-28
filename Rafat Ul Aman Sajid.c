@@ -1,36 +1,22 @@
 #include <stdio.h>
 #define MAX_QUEUE_SIZE 100
-typedef struct Processes
- {
+typedef struct Processes {
 	int p_no;
 	int arr_time;
 	int burst_time;
-}
-
-
-Process;
+} Process;
 Process * queue[MAX_QUEUE_SIZE];
 int front = 0, rear = -1, processed = 0, curr_time = 0, tq = 6;
 int last_front = 0, last_rear = -1;
-void swap(Process * a, Process * b) 
-
-
-
-
-
-{
+void swap(Process * a, Process * b) {
 	Process temp = * a;
 	* a = * b;
 	* b = temp;
 }
-
-
-void sort(Process p[], int n) 
-{
+void sort(Process p[], int n) {
 	int i, j;
 	short swapped;	
-	for (i = 0; i < n; ++i) 
-	{
+	for (i = 0; i < n; ++i) {
 		swapped = 0;
 		for (j = 0; j < n-i-1; ++j)
 		{
@@ -44,9 +30,6 @@ void sort(Process p[], int n)
 			break;
 	}
 }
-
-
-
 void enqueue(Process p[], int n) {
 	int i, j, can_insert;
 	for (i = 0; i < n; ++i)
@@ -75,9 +58,6 @@ void enqueue(Process p[], int n) {
 			queue[++rear] = queue[i];
 	}
 }
-
-
-
 void execute() {
 	int i;
 	
@@ -106,14 +86,13 @@ void execute() {
 		}
 	}
 }
-
 int main() {
 	int n, i;
 	short err_flag = 0;	
 	do {
 		if (err_flag == 1)
 			fprintf(stderr, "\nNumber of processes should be greater than 1.\n");
-		printf("How Many Processes: ");
+		printf("Enter the number of processes: ");
 		scanf("%d", &n);
 		err_flag = 1;
 	} while (n < 1);
@@ -127,7 +106,7 @@ int main() {
 		scanf("%d", &p[i].burst_time);
 		p[i].p_no = i+1;
 	}
-	sort(&p[0], n); 	
+	sort(&p[0], n); // Sort the processes according to the arrival time of each process.	
 	while (1) {
 		enqueue(p, n);
 		printf("\nIn queue: ");
@@ -136,7 +115,7 @@ int main() {
 		}
 		printf("\nFront = %d, Rear = %d.\n\n", front, rear);
 		execute();
-	
+		// If all the processes have been processed, break from the loop.
 		if (processed == n)
 			break;
 	}
