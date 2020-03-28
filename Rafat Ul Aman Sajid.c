@@ -106,7 +106,7 @@ int main() {
 		scanf("%d", &p[i].burst_time);
 		p[i].p_no = i+1;
 	}
-	sort(&p[0], n); // Sort the processes according to the arrival time of each process.	
+	sort(&p[0], n); 	
 	while (1) {
 		enqueue(p, n);
 		printf("\nIn queue: ");
@@ -115,7 +115,6 @@ int main() {
 		}
 		printf("\nFront = %d, Rear = %d.\n\n", front, rear);
 		execute();
-		// If all the processes have been processed, break from the loop.
 		if (processed == n)
 			break;
 	}
